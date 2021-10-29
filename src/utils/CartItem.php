@@ -12,6 +12,11 @@
             $this->quantity = $this->quantity + $count;
         }
 
+                
+        public function removeQuantity($count){
+            $this->quantity = $this->quantity - $count;
+        }
+
         public function getId(){
             return $this->id;
         }

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 29 Paź 2021, 15:13
--- Wersja serwera: 10.4.21-MariaDB
--- Wersja PHP: 7.4.25
+-- Czas generowania: 22 Sty 2021, 22:54
+-- Wersja serwera: 10.4.14-MariaDB
+-- Wersja PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,7 +35,7 @@ CREATE TABLE `addresses` (
   `zipcode` char(6) DEFAULT NULL,
   `city` varchar(50) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL,
-  `phoneNumber` char(12) DEFAULT NULL,
+  `phoneNumber` char(9) DEFAULT NULL,
   `nip` char(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -44,8 +44,8 @@ CREATE TABLE `addresses` (
 --
 
 INSERT INTO `addresses` (`id`, `userId`, `firstName`, `lastName`, `zipcode`, `city`, `address`, `phoneNumber`, `nip`) VALUES
-(6, 6, 'Marcin', 'Nowak', '02-242', 'Warszawa', 'Aleje 53', '222-222-201', '563147312'),
-(7, 6, 'Andrzej', 'Nowak', '42-124', 'Lublin', 'Nadbystrzycka 39', '444-444-444', ''),
+(6, 6, 'Marcin', 'Nowak', 'Lwowsk', '21-412', 'Warszawa', '412-512-1', ''),
+(7, 6, 'Andrzej', 'Nowak', 'Lubels', '42-124', 'Lublin', '412-412-2', ''),
 (8, 4, 'Sebastian', 'Guzik', 'Test 1', '21-512', 'Warszawa', '512-512-5', '');
 
 -- --------------------------------------------------------
@@ -67,11 +67,12 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id`, `name`, `description`, `price`, `visable`) VALUES
-(1, 'HP Pavilion 15 Ryzen 5-4500/16GB/512/Win10 Silver', 'Uniwersalny laptop HP Pavilion 15 \r\nPoznaj HP Pavilion 15. Wyjątkową serię laptop&oacute;w, kt&oacute;ra sprosta Twoim wszelkim oczekiwaniom. Nowoczesny procesor AMD Radeon&trade; oraz zintegrowany układ graficzny nigdy Cię nie zawiodą. To uniwersalne urządzenie sprawdzi się, gdy będziesz używać go do pracy w biurze lub zapragniesz zrelaksować się w domu przy multimediach, czy grze. Wszystko to obejrzysz na wysokiej klasy matowym ekranie w technologii IPS oraz w rozdzielczości Full HD. Zostań szczęśliwym posiadaczem laptopa HP Pavilion 15.\r\n\r\nProcesor AMD Radeon&trade; 5\r\nZyskaj moc, wydajność, szybkość i responsywność, kt&oacute;re zapewni Ci procesor AMD Radeon&trade; 5. Zaawansowana jednostka zarządzana autorską architekturą AMD Zen. Przygotuj się na znakomitą płynność obsługi zadań, jaką procesor osiąga dzięki funkcji rezerwowania zasob&oacute;w CPU. Teraz możesz grać w popularne gry, swobodnie strumieniować multimedia oraz pracować z wymagającymi programami.\r\n\r\nOsiągnij więcej\r\nWs', '2999.00', 1),
+(1, 'przedmiot test 1', 'test opis przedmiotu 1  test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1  test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1  test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1  test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1  test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1  test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1  test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1  test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1 test opis przedmiotu 1  test opis przedmiotu 1 test opis przedmiotu 1 te', '12.50', 1),
 (6, 'test przedmiot 2 nie widoczny', 'opis przedmiotu 2', '10.00', 0),
-(12, 'SteelSeries Rival 3', 'Mysz dla graczy SteelSeries Rival 3\r\nNajnowsza mysz Rival 3 od firmy SteelSeries to następca legendarnej myszki Rival 110. Oznacza to, że jest jeszcze lepsza od swojej genialnej poprzedniczki. Mysz Rival 3 została wykonana z bardzo wytrzymałych materiał&oacute;w, a jednocześnie jej konstrukcja jest lekka, komfortowa i ergonomiczna.\r\n\r\nNiezmienną jakość działania zagwarantują mechaniczne przełączniki o wytrzymałości aż 60 milion&oacute;w kliknięć. Sensor PixArt natomiast oferuje precyzję oraz prawdziwe śledzenie ruch&oacute;w użytkownika 1:1.\r\n\r\nCo więcej, dzięki pamięci wewnętrznej możesz zapisać polling rate, mapowanie przycisk&oacute;w oraz do 5 ustawień CPI bezpośrednio na urządzeniu.\r\n\r\nMechaniczne przełączniki\r\nMysz SteelSeries Rival 3 została wyposażona w mechaniczne przełączniki o wytrzymałości aż 60 milion&oacute;w kliknięć. W przełącznikach zastosowano nie tylko system split trigger, ale r&oacute;wnież mechanizm zapewniający wytrzymałość i niezmienna jakość działania, identycz', '149.00', 1),
-(32, 'HP OfficeJet 8012e', 'HP Instant Ink\r\nTa drukarka jest kompatybilna z usługą HP Instant Ink. Kup urządzenie i oszczędzaj na eksploatacji nawet 70%. HP Instant Ink to usługa subskrypcji tuszu, kt&oacute;ra sprawia, że drukowanie jest:\r\n\r\n- tańsze nawet o 70%\r\n- ekologiczne\r\n- niezawodne\r\n\r\nJak to działa?\r\nZarejestruj swoją drukarkę i wybierz subskrypcję HP Instant Ink &ndash; TUTAJ\r\nSprawdź ile stron drukujesz i wybierz odpowiedni plan subskrypcji &ndash; już od 4,99 zł miesięcznie\r\nTwoja drukarka sama zam&oacute;wi materiały eksploatacyjne, abyś otrzymał je zanim odczujesz brak\r\nW subskrypcji płacisz tyle samo za strony kolorowe, co za czarno-białe i oszczędzasz nawet 70% koszt&oacute;w\r\nMożesz w pełni kontrolować i zmieniać plan subskrypcji dostosowując go do swoich aktualnych potrzeb\r\n\r\nUrządzenie wielofunkcyjne idealne do domu i małego biura HP Envy 8012e z HP+\r\nHP Envy 8012e z usługą HP+ to idealne rozwiązanie, gdy musisz szybko wydrukować bądź skopiować dokumenty przed wyjściem albo prowadzisz małą fir', '699.00', 1),
-(33, 'A4Tech KV-300H Slim szaro-czarna USB', 'Klawiatura do domu i biura A4Tech KV-300H Slim\r\nSkonstruowana w klasycznym stylu, prosta i wygodna. Popraw ergonomię swojej pracy, wybierając klawiaturę A4Tech KV-300H Slim. Przemyślana konstrukcja pozwala na wygodną pracę, nie męczy nadgarstk&oacute;w i dłoni. Cały dzień pisania w biurze czy wieczorne rozmowy ze znajomymi na czacie - teraz to wszystko wykonasz lekko i wygodnie.\r\n\r\nA4Tech KV-300H Slim wyr&oacute;żnia się swoim niskoprofilowym designem w odcieniach szarości i grafitu, kt&oacute;ry z pewnością dopasuje się do każdego nowoczesnego biura. Niski profil klawiszy daje odczucie pisania jak na laptopie, zapewniając komfort podczas użytkowania. Wyposażona w antypoślizgowe stopki uniemożliwia uciążliwemu przesuwaniu podczas pracy czy rozrywki. Dodatkowo A4Tech KV-300H Slim została wyposażona w dwa porty USB 2.0 do kt&oacute;rych podłączysz kolejne urządzenia peryferyjne.', '129.99', 1),
+(12, 'test przedmiot 2', 'opis przedmiotu 2', '10.00', 1),
+(31, 'qrews', 'rwe', '1.01', 1),
+(32, 'test przedmiot 2v1', 'rwe 222', '1.01', 1),
+(33, 'test 3', 'test opis 3', '15.56', 1),
 (34, 'Intel Core i7-10700K', 'Procesor Intel Core i7-10700K\r\nPoznaj moc do dziesiątej potęgi. Nowy, odblokowany procesor Intel&reg; Core&trade; i7-10700K z rodziny Comet Lake zapewnia znacznie wyższą wydajność, kt&oacute;ra przekłada się na wzrost produktywności i fantastyczną rozrywkę. Intel Core i7 10-generacji oferuje m.in. częstotliwość dochodzącą do 5.1 GHz w trybie turbo, 8 rdzeni, 16 wątk&oacute;w, a także inteligentną optymalizację systemu. Wbudowane inteligentne funkcje wydajności uczą się i przystosowują do nawyk&oacute;w użytkownika oraz dynamicznie kierują moc, tam gdzie jest najbardziej potrzebna. Odkryj nowe ultramożliwości z procesorem Intel&reg; Core&trade; i7-10700K.', '1649.00', 1),
 (35, 'RAM DDR4 HyperX Fury Red 16GB (2x8GB) 2666MHz CL16', 'Odkryj pamięć RAM DDR4 HyperX FURY 2x8GB w 360 stopniach\r\nZmodernizuj sw&oacute;j system dzięki ekonomicznej i wysokowydajnej pamięci RAM DDR4 HyperX FURY, oferującej taktowanie 2666 MHz oraz op&oacute;źnienia na poziomie CL16. Każdy moduł pamięci FURY DDR4 przechodzi testy przy pełnej szybkości i jest objęty wieczystą gwarancją. To bezproblemowa i przystępna cenowo modernizacja Twojego systemu.\r\n\r\nSprawdź, jak HyperX FURY wygląda w rzeczywistości. Chwyć zdjęcie poniżej i przeciągnij je w lewo lub prawo aby obr&oacute;cić produkt lub skorzystaj z przycisk&oacute;w nawigacyjnych.', '339.00', 1);
 
@@ -92,7 +93,7 @@ CREATE TABLE `logged_in_users` (
 --
 
 INSERT INTO `logged_in_users` (`sessionId`, `userId`, `lastUpdate`) VALUES
-('gq4tecs1ahllbei17h5fuhe21l', 4, '2021-10-29 15:10:19');
+('opvpvui1jsvh52ot1f42a297a2', 6, '2021-01-18 14:44:57');
 
 -- --------------------------------------------------------
 
@@ -118,9 +119,7 @@ INSERT INTO `orderitems` (`id`, `orderId`, `itemId`, `quantity`) VALUES
 (5, 6, 12, 1),
 (6, 6, 33, 4),
 (7, 7, 34, 1),
-(8, 7, 35, 2),
-(10, 9, 12, 1),
-(11, 10, 12, 3);
+(8, 7, 35, 2);
 
 -- --------------------------------------------------------
 
@@ -144,9 +143,7 @@ CREATE TABLE `orders` (
 INSERT INTO `orders` (`id`, `userId`, `date`, `totalPrice`, `addressId`, `paymetnAddressId`) VALUES
 (5, 6, '2021-01-18 13:46:47', '1988.00', 6, NULL),
 (6, 6, '2021-01-18 13:47:33', '84.74', 7, NULL),
-(7, 4, '2021-01-18 14:36:50', '2327.00', 8, NULL),
-(9, 6, '2021-10-29 14:05:49', '10.00', 7, NULL),
-(10, 4, '2021-10-29 15:13:39', '447.00', 8, NULL);
+(7, 4, '2021-01-18 14:36:50', '2327.00', 8, NULL);
 
 -- --------------------------------------------------------
 
@@ -226,7 +223,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT dla tabeli `items`
@@ -238,13 +235,13 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT dla tabeli `orderitems`
 --
 ALTER TABLE `orderitems`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT dla tabeli `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`

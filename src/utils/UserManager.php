@@ -85,6 +85,18 @@ class UserManager {
         return $id;
     }
 
+    static function getUserName($db, $userId){
+        $name = "";
+
+        $sql = "SELECT userName FROM users WHERE id=$userId";
+        $result = $db->select($sql);
+
+        if($result != null)
+            $name = $result["userName"];
+
+        return $name;
+    }
+
     static function getLoggedInUserId($db){
         if (session_status() == PHP_SESSION_NONE) {
             session_start();

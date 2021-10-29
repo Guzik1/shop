@@ -17,23 +17,17 @@
     include_once('./utils/UserManager.php');
     $userId = UserManager::getLoggedInUserId($db);
 
+    $addressId = -1;
+    $addressId = filter_input(INPUT_GET, "addressId", FILTER_VALIDATE_INT);
+
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $addressId = filter_input(INPUT_POST, "addressId", FILTER_VALIDATE_INT);
+
         if($userId == -1)
         header("location: ./index.php");
 
         if(!isset($_SESSION['cart']))
             header("location: ./index.php");
-
-        $filters = array(
-            'firstName' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'lastName' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'address' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'postalCode' => array( 'filter' => FILTER_VALIDATE_REGEXP,
-                                   'options' => array( 'regexp' => '/^[0-9]{2}-[0-9]{3}$/' )),
-            'city' => FILTER_SANITIZE_FULL_SPECIAL_CHARS,
-            'telephone' => array( 'filter' => FILTER_VALIDATE_REGEXP,
-                                  'options' => array( 'regexp' => '/^[0-9]{3}-[0-9]{3}-[0-9]{3}$/' ))
-        );
 
         $data = filter_input_array(INPUT_POST, $filters);
                             
@@ -45,14 +39,7 @@
         }
 
         if ($errors === "") {
-            $sql = "INSERT INTO `addresses`(`userId`, `firstName`, `lastName`, `zipcode`, `city`, `address`, `phoneNumber`) " .
-            "VALUES ($userId, '" . $data["firstName"] . "','" . $data["lastName"] . "','" . $data["address"] . "','" . $data["postalCode"] . 
-            "', '" . $data["city"] . "', '" . $data["telephone"] . "')";
-
-            $db->insert($sql);
-            $addressId = $db->getLastInserterdIndex();
-
-            $cartObj = unserialize($_SESSION['cart']);
+                       $cartObj = unserialize($_SESSION['cart']);
             $cart = $cartObj->getCart();
 
             $sum = 0.0;
@@ -145,45 +132,41 @@
                         <p class="float-right">Razem: <?php echo $sum; ?> PLN</p><br/>
 
                         <h5 class="text-center">Adres dostawy:</h5>
-
                         <?php 
-                            if ($_SERVER['REQUEST_METHOD'] === 'POST')
-                                echo $errors;
+                            if(!ISSET($addressId)){
+                                ?>
+                                    <a class="btn btn-primary btn-dark" href="addresses.php?action=select" role="button">Wybierz adres</a>
+                                <?php
+                            }else{
+                                $sql = "SELECT `userId`, `firstName`, `lastName`, `zipcode`, `city`, `address`, `phoneNumber` FROM `addresses` WHERE `id`=$addressId";
+                                $addressData = $db->select($sql);
+
+                                if($addressData["userId"] == $id){
+                                    ?>
+                                        <p>Imię nazwisko: <?php echo $addressData["firstName"] . " " . $addressData["lastName"]; ?></p>
+                                        <p>Miasto: <?php echo $addressData["zipcode"] . " " . $addressData["city"]; ?></p>
+                                        <p>Adres: <?php echo $addressData["address"]; ?></p>
+                                        <p>Telefon: <?php echo $addressData["phoneNumber"]; ?></p>
+
+                                        <a class="btn btn-primary btn-dark" href="addresses.php?action=select" role="button">Wybierz inny adres</a>
+                                    <?php
+                                }
+                            }
                         ?>
 
                         <form action="./processOrder.php" method="post">
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="firstName">Imię</label>
-                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Imię" require>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="lastName">Nazwisko</label>
-                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Nazwisko" require>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="address">Adres</label>
-                                <input type="text" class="form-control" id="address" name="address" placeholder="Adres" require>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-3 col-4">
-                                    <label for="postalCode">Kod pocztowy</label>
-                                    <input type="text" class="form-control" id="postalCode" name="postalCode" pattern="^\d{2}-\d{3}$" placeholder="00-000" require >
-                                </div>
-                                <div class="form-group col-md-5 col-8">
-                                    <label for="city">Miasto</label>
-                                    <input type="text" class="form-control" id="city" name="city" placeholder="Miasto" require >
-                                </div>
-                                <div class="form-group col-md-4 col-12">
-                                    <label for="telephone">Telefon</label>
-                                    <input type="text" class="form-control" id="telephone" name="telephone" placeholder="123-456-789" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}" require >
-                                </div>
-                            </div>
+                            <?php
+                                if(ISSET($addressId)){
+                                    if($addressId != -1)
+                                        echo "<input type='hidden' id='addressId' name='addressId' value='$addressId'>";
 
-                            <div class="text-center">
-                                <button type="submit" class="btn btn-dark btn-primary col-12 col-md-4 col-xl-3">Zamów</button>
-                            </div>
+                                    ?>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-dark btn-primary col-12 col-md-4 col-xl-3">Zamów</button>
+                                        </div>
+                                    <?php
+                                }
+                            ?>
                         </form>
                     </div>
             <?php } ?>

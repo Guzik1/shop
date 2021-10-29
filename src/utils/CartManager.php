@@ -16,6 +16,18 @@
             }
         }
 
+        public function removeOneItem($id){
+            include_once("CartItem.php");
+
+            $key = $this->findItem($id);
+            
+            if($key == false){
+                if($this->cart[$key]->getQuantity() > 1){
+                    $this->cart[$key]->removeQuantity(1);
+                }
+            }
+        }
+
         public function removeItem($id){
             $key = $this->findItem($id);
 
