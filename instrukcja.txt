@@ -1,10 +1,6 @@
 ﻿Pliki projektu znajdują się w katalogu src
 Baza danych znajduje się w pliku shop.sql
 
-https://www.db4free.net/phpMyAdmin/
-shop12
-shopshop
-
 Nazwę bazy danych, login, hasło i adres ip można zmienić w pliku konfiguracyjnym:
 	./src/utils/config.php
 
