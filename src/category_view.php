@@ -13,15 +13,23 @@
             include_once("./utils/database.php");
             $db = new Baza();
 
-            $search = filter_input(INPUT_GET, "search", FILTER_SANITIZE_ADD_SLASHES);
+            $cat = $_GET['catId'];
 
-            $sql = "SELECT `id`, `name`, `price` FROM `items` WHERE `visable`=1 AND `name` LIKE '%$search%' LIMIT 10";
+            $sqlCat = "SELECT `id`, `category_name` FROM `categories` WHERE `id`='$cat'";
+            $cats = $db->selectFetchAll($sqlCat);
+
+            $sql = "SELECT `id`, `name`, `price` FROM `items` WHERE `visable`=1";
             $data = $db->selectFetchAll($sql);
 
             include('utils/nav.php');
 
+            $sql3 = 'SELECT `item_categories`.`item_fk`, `items`.`id`, `items`.`name`, `items`.`price` FROM `item_categories` INNER JOIN `items` ON `item_categories`.`item_fk` = `items`.`id` WHERE  `item_categories`.`category_fk`=' .$cats[0]['id'];
+            $prods = $db->selectFetchAll($sql3);
+
+            echo "<div style='height:1em' class='jumbotron text-center'> <h3> " .$cats[0]['category_name']. " </h3></div>";
             echo '<div class="row justify-content-md-center">';
             echo '<div class="row col-7">';
+
 
             for($i = 0; $i < count($data); $i = $i+3){
                 for($j = 0; $j < 3; $j++){
@@ -31,6 +39,10 @@
                     $dataRow = $data[$i + $j];
                     
                     ?>
+                     <script>
+                                                    console.log(<?= json_encode($prods); ?>);
+                                                    console.log(<?= json_encode($sql3); ?>);
+                                                    </script>
                         <div class="col-xl-4 col-md-6 col-12 p-2">
                             <div class="card">
                                 <div class="text-center" style="width:92%; margin: 4%;">
@@ -54,11 +66,6 @@
         ?>
 
         </div></div>
-
-
-
-
-
         <?php
             include('utils/footer.php');
         ?>

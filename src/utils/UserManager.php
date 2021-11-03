@@ -24,8 +24,8 @@ class UserManager {
         include "config.php";
 
         $args = [
-            'login' => FILTER_SANITIZE_MAGIC_QUOTES,
-            'passwd' => FILTER_SANITIZE_MAGIC_QUOTES
+            'login' => FILTER_SANITIZE_ADD_SLASHES,
+            'passwd' => FILTER_SANITIZE_ADD_SLASHES
         ];
 
         $dane = filter_input_array(INPUT_POST, $args);
