@@ -15,7 +15,7 @@
             include_once("./utils/database.php");
             $db = new Baza();
 
-            $sql = "SELECT `id`, `name`, `price` FROM `items` WHERE `visable`=1 LIMIT 10";
+            $sql = "SELECT `id`, `name`, `price` FROM `items` WHERE `visable`=1 LIMIT 15";
             $data = $db->selectFetchAll($sql);
 
             echo '<div class="row justify-content-md-center">';

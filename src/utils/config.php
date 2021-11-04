@@ -9,5 +9,4 @@
 
     // hash
     $hash_key = "3219553fcff1b3b1f3d872b39aee8ab1f797542f12b334b4655e9e84eea58d2f";
-
 ?>
