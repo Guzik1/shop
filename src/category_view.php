@@ -31,18 +31,18 @@
             echo '<div class="row col-7">';
 
 
-            for($i = 0; $i < count($data); $i = $i+3){
+            for($i = 0; $i < count($prods); $i = $i+3){
                 for($j = 0; $j < 3; $j++){
-                    if(($i + $j) >= count($data))
+                    if(($i + $j) >= count($prods))
                         continue;
                     
-                    $dataRow = $data[$i + $j];
+                    $dataRow = $prods[$i + $j];
                     
                     ?>
-                     <script>
-                                                    console.log(<?= json_encode($prods); ?>);
-                                                    console.log(<?= json_encode($sql3); ?>);
-                                                    </script>
+                    <script>
+                        console.log(<?= json_encode($prods); ?>);
+                        console.log(<?= json_encode($data); ?>);
+                    </script>
                         <div class="col-xl-4 col-md-6 col-12 p-2">
                             <div class="card">
                                 <div class="text-center" style="width:92%; margin: 4%;">

@@ -20,7 +20,7 @@
             $isAdmin = UserManager::userIsAdmin($db, $id);
         }
 
-        $sql = "SELECT `id`, `category_name` FROM `categories`";
+        $sql = "SELECT `id`, `category_name`, `main_category` FROM `categories`";
         $categories = $db->selectFetchAll($sql);
     ?>
 
@@ -65,27 +65,31 @@
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle <?php if($isAdmin){ echo "text-danger"; } ?>" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <?php
                         echo "Kategorie";
                     ?>
                 </a>
 
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <ul class="dropdown-menu multi-level" aria-labelledby="navbarDropdownMenuLink">
                     <?php
                             for($i = 0; $i < count($categories); $i = $i+1){
                                 $cat = $categories[$i];
-                                $catUrl = './category_view.php?catId='.$cat['id'].'';
-                                echo "<a class='dropdown-item' method='get' href='./category_view.php?catId=" .$cat['id'] ."'>". $cat["category_name"] ."</a>"
+                                if($cat['main_category'] == '0'){
+                                    echo "<li><a class='dropdown-item dropdown-submenu' method='get' href='#'>". $cat["category_name"] ."</a>";
+                                    for($j = 0; $j < count($categories); $j = $j+1){
+                                        $subCat = $categories[$j];
+                                        echo "<ul class=''>";
+                                        if($subCat['main_category'] == $cat['id']){
+                                            echo "<li><a class='dropdown-item' href='./category_view.php?catId=" .$subCat['id'] ."'>". $subCat["category_name"] ."</a></li>";
+                                        }
+                                        echo "</li></ul>";
+                                    }
+                                }
                                 ?>
-                                <script>
-                                console.log(<?= json_encode($catUrl); ?>);
-                                </script>
-
                     <?php } ?>
-                </div>
+                </ul>
             </li>
-
         </ul>
     </div>
 
@@ -117,4 +121,5 @@
             </li>
         </ul>
     </div>
+
 </nav>

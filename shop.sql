@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 29 Paź 2021, 15:13
+-- Czas generowania: 04 Lis 2021, 17:57
 -- Wersja serwera: 10.4.21-MariaDB
--- Wersja PHP: 7.4.25
+-- Wersja PHP: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -51,6 +51,35 @@ INSERT INTO `addresses` (`id`, `userId`, `firstName`, `lastName`, `zipcode`, `ci
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `category_name` varchar(45) NOT NULL,
+  `main_category` int(7) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `categories`
+--
+
+INSERT INTO `categories` (`id`, `category_name`, `main_category`) VALUES
+(1, 'Drukarki', 13),
+(2, 'Procesory', 12),
+(7, 'Myszki', 11),
+(9, 'Słuchawki', 11),
+(11, 'Akcesoria do laptopów', 0),
+(12, 'Podzespoły komputerowe', 0),
+(13, 'Urządzenia peryferyjne', 0),
+(14, 'Laptopy i komputery', 0),
+(15, 'Pamięć RAM', 12),
+(16, 'Laptopy', 14),
+(17, 'Komputery', 14);
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `items`
 --
 
@@ -73,7 +102,42 @@ INSERT INTO `items` (`id`, `name`, `description`, `price`, `visable`) VALUES
 (32, 'HP OfficeJet 8012e', 'HP Instant Ink\r\nTa drukarka jest kompatybilna z usługą HP Instant Ink. Kup urządzenie i oszczędzaj na eksploatacji nawet 70%. HP Instant Ink to usługa subskrypcji tuszu, kt&oacute;ra sprawia, że drukowanie jest:\r\n\r\n- tańsze nawet o 70%\r\n- ekologiczne\r\n- niezawodne\r\n\r\nJak to działa?\r\nZarejestruj swoją drukarkę i wybierz subskrypcję HP Instant Ink &ndash; TUTAJ\r\nSprawdź ile stron drukujesz i wybierz odpowiedni plan subskrypcji &ndash; już od 4,99 zł miesięcznie\r\nTwoja drukarka sama zam&oacute;wi materiały eksploatacyjne, abyś otrzymał je zanim odczujesz brak\r\nW subskrypcji płacisz tyle samo za strony kolorowe, co za czarno-białe i oszczędzasz nawet 70% koszt&oacute;w\r\nMożesz w pełni kontrolować i zmieniać plan subskrypcji dostosowując go do swoich aktualnych potrzeb\r\n\r\nUrządzenie wielofunkcyjne idealne do domu i małego biura HP Envy 8012e z HP+\r\nHP Envy 8012e z usługą HP+ to idealne rozwiązanie, gdy musisz szybko wydrukować bądź skopiować dokumenty przed wyjściem albo prowadzisz małą fir', '699.00', 1),
 (33, 'A4Tech KV-300H Slim szaro-czarna USB', 'Klawiatura do domu i biura A4Tech KV-300H Slim\r\nSkonstruowana w klasycznym stylu, prosta i wygodna. Popraw ergonomię swojej pracy, wybierając klawiaturę A4Tech KV-300H Slim. Przemyślana konstrukcja pozwala na wygodną pracę, nie męczy nadgarstk&oacute;w i dłoni. Cały dzień pisania w biurze czy wieczorne rozmowy ze znajomymi na czacie - teraz to wszystko wykonasz lekko i wygodnie.\r\n\r\nA4Tech KV-300H Slim wyr&oacute;żnia się swoim niskoprofilowym designem w odcieniach szarości i grafitu, kt&oacute;ry z pewnością dopasuje się do każdego nowoczesnego biura. Niski profil klawiszy daje odczucie pisania jak na laptopie, zapewniając komfort podczas użytkowania. Wyposażona w antypoślizgowe stopki uniemożliwia uciążliwemu przesuwaniu podczas pracy czy rozrywki. Dodatkowo A4Tech KV-300H Slim została wyposażona w dwa porty USB 2.0 do kt&oacute;rych podłączysz kolejne urządzenia peryferyjne.', '129.99', 1),
 (34, 'Intel Core i7-10700K', 'Procesor Intel Core i7-10700K\r\nPoznaj moc do dziesiątej potęgi. Nowy, odblokowany procesor Intel&reg; Core&trade; i7-10700K z rodziny Comet Lake zapewnia znacznie wyższą wydajność, kt&oacute;ra przekłada się na wzrost produktywności i fantastyczną rozrywkę. Intel Core i7 10-generacji oferuje m.in. częstotliwość dochodzącą do 5.1 GHz w trybie turbo, 8 rdzeni, 16 wątk&oacute;w, a także inteligentną optymalizację systemu. Wbudowane inteligentne funkcje wydajności uczą się i przystosowują do nawyk&oacute;w użytkownika oraz dynamicznie kierują moc, tam gdzie jest najbardziej potrzebna. Odkryj nowe ultramożliwości z procesorem Intel&reg; Core&trade; i7-10700K.', '1649.00', 1),
-(35, 'RAM DDR4 HyperX Fury Red 16GB (2x8GB) 2666MHz CL16', 'Odkryj pamięć RAM DDR4 HyperX FURY 2x8GB w 360 stopniach\r\nZmodernizuj sw&oacute;j system dzięki ekonomicznej i wysokowydajnej pamięci RAM DDR4 HyperX FURY, oferującej taktowanie 2666 MHz oraz op&oacute;źnienia na poziomie CL16. Każdy moduł pamięci FURY DDR4 przechodzi testy przy pełnej szybkości i jest objęty wieczystą gwarancją. To bezproblemowa i przystępna cenowo modernizacja Twojego systemu.\r\n\r\nSprawdź, jak HyperX FURY wygląda w rzeczywistości. Chwyć zdjęcie poniżej i przeciągnij je w lewo lub prawo aby obr&oacute;cić produkt lub skorzystaj z przycisk&oacute;w nawigacyjnych.', '339.00', 1);
+(35, 'RAM DDR4 HyperX Fury Red 16GB (2x8GB) 2666MHz CL16', 'Odkryj pamięć RAM DDR4 HyperX FURY 2x8GB w 360 stopniach\r\nZmodernizuj sw&oacute;j system dzięki ekonomicznej i wysokowydajnej pamięci RAM DDR4 HyperX FURY, oferującej taktowanie 2666 MHz oraz op&oacute;źnienia na poziomie CL16. Każdy moduł pamięci FURY DDR4 przechodzi testy przy pełnej szybkości i jest objęty wieczystą gwarancją. To bezproblemowa i przystępna cenowo modernizacja Twojego systemu.\r\n\r\nSprawdź, jak HyperX FURY wygląda w rzeczywistości. Chwyć zdjęcie poniżej i przeciągnij je w lewo lub prawo aby obr&oacute;cić produkt lub skorzystaj z przycisk&oacute;w nawigacyjnych.', '339.00', 1),
+(36, 'G4M3R 500 i5-10400F/16GB/1TB/RTX2060/W10PX', 'Wejdź do gry z x-kom G4M3R 500 – desktopem, który dzięki swej mocy obliczeniowej zapewnia dynamiczną rozgrywkę z wymagającymi tytułami. Z wydajności komputerów x-kom korzystają najlepsze drużyny w kraju, tocząc zażarte batalie o tytuł mistrza w Counter-Strike: Global Offensive, League of Legends i Heartstone. Na desktopie G4M3R 500 grają gwiazdy polskiego e-sportu.', '5099.00', 1),
+(37, 'HyperX Cloud Alpha', 'HyperX™ Cloud Alpha to słuchawki o przełomowej dwukomorowej konstrukcji, zapewniającej większą wyrazistość dźwięku i mniej zniekształceń. Podwójne komory pozwalają oddzielić basy od tonów średnich i wysokich, umożliwiając optymalne dostrojenie i czystsze, bardziej zrównoważone brzmienie. Słuchawki Cloud Alpha doskonale wpisują się w tradycję wydajności i komfortu produktów z rodziny HyperX. Zastosowano w nich charakterystyczną czerwoną piankę z pamięcią kształtu, regulowany pałąk oraz obicie z miękkiej i jeszcze bardziej elastycznej imitacji skóry.', '290.00', 1),
+(38, 'HyperX Cloud Buds', 'HyperX Cloud Buds™ to idealny towarzysz podróży dla osób, które wyróżniają się aktywnym trybem życia. Słuchawki sprawdzą się świetnie podczas słuchania muzyki, strumieniowania ulubionych multimediów lub grania w gry casualowe dla miłego spędzenia czasu. Do zestawu dołączono trzy wkładki o różnych rozmiarach, aby zapewnić doskonały komfort przez cały dzień.', '239.00', 1),
+(39, 'HyperX Cloud PS4', 'Zestaw słuchawkowy HyperX Cloud został zaprojektowany do PlayStation 4 i jest oficjalnie licencjonowany przez Sony Interactive Entertainment Europe.\r\n\r\nOpracowano go specjalnie dla graczy PS4. Wyjątkowy komfort pozwala zanurzyć się dźwięku i grać przez długie godziny. Zestaw słuchawkowy HyperX Cloud zaprojektowano tak, aby był wytrzymały. Wyposażony jest w solidny aluminiowy pałąk, a dwuletnia gwarancja potwierdza, że wytrzyma tyle co Ty.', '320.00', 1),
+(40, 'HyperX Cloud Chat for Xbox', 'HyperX Cloud Chat Headset z oficjalnym certyfikatem Xbox zawiera przetwornik o średnicy 40mm, który zapewnia krystalicznie czysty dźwięk rozmów głosowych. Pojedynczy nausznik pozwala słyszeć dźwięk gry z telewizora lub domowego centrum rozrywki, a jednocześnie prowadzić rozmowy głosowe ze znajomymi.', '89.00', 1),
+(41, 'AMD Ryzen 5 1600 AF', 'Poznaj AMD Ryzen 5 1600 AF. Udoskonalony procesor z architekturą AMD Zen, przeznaczony do zastosowań profesjonalnych oraz gamingu. Odznacza się wysoką kulturą pracy. Daje się w prosty sposób podkręcać. Bez problemu radzi sobie z wielozadaniową pracą. A wszystko to przy wyjątkowo niskim poborze energii.', '559.00', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `item_categories`
+--
+
+CREATE TABLE `item_categories` (
+  `item_category_id` int(7) NOT NULL,
+  `item_fk` int(7) NOT NULL,
+  `category_fk` int(7) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Zrzut danych tabeli `item_categories`
+--
+
+INSERT INTO `item_categories` (`item_category_id`, `item_fk`, `category_fk`) VALUES
+(1, 32, 1),
+(2, 37, 9),
+(3, 38, 9),
+(4, 39, 9),
+(5, 40, 9),
+(6, 12, 7),
+(7, 34, 2),
+(8, 41, 2),
+(9, 35, 15),
+(10, 36, 17),
+(11, 1, 16);
 
 -- --------------------------------------------------------
 
@@ -86,13 +150,6 @@ CREATE TABLE `logged_in_users` (
   `userId` int(11) NOT NULL,
   `lastUpdate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Zrzut danych tabeli `logged_in_users`
---
-
-INSERT INTO `logged_in_users` (`sessionId`, `userId`, `lastUpdate`) VALUES
-('gq4tecs1ahllbei17h5fuhe21l', 4, '2021-10-29 15:10:19');
 
 -- --------------------------------------------------------
 
@@ -182,10 +239,25 @@ ALTER TABLE `addresses`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeksy dla tabeli `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `main_category` (`main_category`);
+
+--
 -- Indeksy dla tabeli `items`
 --
 ALTER TABLE `items`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `item_categories`
+--
+ALTER TABLE `item_categories`
+  ADD PRIMARY KEY (`item_category_id`),
+  ADD KEY `item_fk` (`item_fk`),
+  ADD KEY `category_fk` (`category_fk`);
 
 --
 -- Indeksy dla tabeli `logged_in_users`
@@ -229,10 +301,22 @@ ALTER TABLE `addresses`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT dla tabeli `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
 -- AUTO_INCREMENT dla tabeli `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT dla tabeli `item_categories`
+--
+ALTER TABLE `item_categories`
+  MODIFY `item_category_id` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT dla tabeli `orderitems`
@@ -255,6 +339,13 @@ ALTER TABLE `users`
 --
 -- Ograniczenia dla zrzutów tabel
 --
+
+--
+-- Ograniczenia dla tabeli `item_categories`
+--
+ALTER TABLE `item_categories`
+  ADD CONSTRAINT `item_categories_ibfk_1` FOREIGN KEY (`category_fk`) REFERENCES `categories` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `item_categories_ibfk_2` FOREIGN KEY (`item_fk`) REFERENCES `items` (`id`) ON UPDATE CASCADE;
 
 --
 -- Ograniczenia dla tabeli `logged_in_users`
