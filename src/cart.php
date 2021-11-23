@@ -69,6 +69,8 @@
                                             
                                             $cart = $cartObj->getCart();
 
+											$sum = 0.0;
+
                                             foreach($cart as $item) {
                                                 $sql = "SELECT `name`, `price` FROM `items` WHERE `id`=" . $item->getId();
                                                 $data = $db->select($sql);
@@ -77,12 +79,19 @@
                                                 echo "<td>" . $data["price"] . "</td>";
                                                 echo "<td><a href='./cart.php?action=removeOne&id=" . $item->getId() . "'>-</a> " . $item->getQuantity() . " <a href='./cart.php?action=addOne&id=" . $item->getId() . "'>+</a></td>";
                                                 echo "<td><a href='./cart.php?action=delete&id=" . $item->getId() . "'>X</a></td></tr>";
+												
+												$sum += $item->getQuantity() * $data["price"];
                                             }
                                         ?>
                                     </tbody> 
                                 </table>
-                            <button onclick="location.href='./cart.php?action=clear'" class="btn bg-dark col-6 col-md-3 text-light">Wyczyść koszyk</button>
-                            <button onclick="location.href='./processOrder.php'" class="btn bg-dark col-6 float-right col-md-3 text-light">Zamów</button>
+								<div class="row col-12">
+									<div class="float-right">Razem: <?php echo $sum; ?> PLN</div>
+								</div>
+								<div class="col-12">
+									<button onclick="location.href='./cart.php?action=clear'" class="btn bg-dark col-6 col-md-3 text-light">Wyczyść koszyk</button>
+									<button onclick="location.href='./processOrder.php'" class="btn bg-dark col-6 float-right col-md-3 text-light">Zamów</button>
+								</div>
                         <?php
                             }else{
                                 echo "Koszyk pusty";

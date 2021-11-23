@@ -39,9 +39,9 @@
                     </thead>
                     <tbody>
                         <?php
-                            $sql = "SELECT `orderitems`.`itemId`, `orderitems`.`quantity`, `items`.`name`, `items`.`price` FROM `orderitems` INNER JOIN `items` WHERE  `orderitems`.`orderId`=$orderId AND `orderitems`.`itemId`=`items`.`id`";
+                            $sql = "SELECT `orderitems`.`itemId`, `orderitems`.`quantity`, `orderitems`.`price`, `items`.`name` FROM `orderitems` INNER JOIN `items` WHERE  `orderitems`.`orderId`=$orderId AND `orderitems`.`itemId`=`items`.`id`";
                             $data = $db->selectFetchAll($sql);
-                            
+
                             for($i = 0; $i < count($data); $i++){
                                 echo "<tr><td>" . $data[$i]["itemId"] . "</td>";
                                 echo "<td>" . $data[$i]["name"] . "</td>";
@@ -57,7 +57,7 @@
                 <div class="col-12">
                     <h4 class="text-center">Adres dostawy:</h4>
                     <?php 
-                        $sql = "SELECT `firstName`, `lastName`, `zipcode`, `city`, `address`, `phoneNumber` FROM `addresses` WHERE `id`=$orderId";
+                        $sql = "SELECT `firstName`, `lastName`, `zipcode`, `city`, `address`, `phoneNumber` FROM `addresses` WHERE `id`=" . $orderData["addressId"];
                         $address = $db->select($sql);
                        
                         if($address != null){

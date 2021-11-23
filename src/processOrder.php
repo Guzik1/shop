@@ -58,7 +58,7 @@
                 $itemId = $item->getId();
                 $quantity = $item->getQuantity();
 
-                $sql = "INSERT INTO `orderitems`(`orderId`, `itemId`, `quantity`) VALUES ('$orderId', '$itemId', '$quantity')";
+                $sql = "INSERT INTO `orderitems`(`orderId`, `itemId`, `quantity`, `price`) VALUES ('$orderId', '$itemId', '$quantity', (SELECT `price` FROM `items` WHERE `id`=$itemId))";
                 $db->insert($sql);
             }
 
