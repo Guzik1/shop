@@ -29,16 +29,8 @@
         if(!isset($_SESSION['cart']))
             header("location: ./index.php");
 
-        $data = filter_input_array(INPUT_POST, $filters);
-                            
-        $errors = "";
-        foreach ($data as $key => $val) {
-            if ($val === false or $val === NULL) {
-                $errors .= $key . " ";
-            }
-        }
 
-        if ($errors === "") {
+
                        $cartObj = unserialize($_SESSION['cart']);
             $cart = $cartObj->getCart();
 
@@ -63,8 +55,14 @@
             }
 
             unset($_SESSION['cart']);
-            header("location: ./index.php");
-        }
+
+            ?>
+                <script>
+                window.location.href = window.location.pathname.substring( 0, window.location.pathname.lastIndexOf( '/' ) + 1 ) + 'index.php'
+                alert("Zamówienie zostało złożone.");
+                </script>
+            <?php
+
     }
 ?>
 

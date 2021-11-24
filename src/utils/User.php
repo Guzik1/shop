@@ -36,12 +36,11 @@
 		}
 
 		function saveToDB($db){
-			$sql = "SELECT EXISTS(SELECT * FROM users WHERE userName='" . $this->userName . "') AS exist";
+			$sql = "SELECT EXISTS(SELECT * FROM users WHERE userName='" . $this->userName . "' OR email='" . $this->email . "') AS exist";
 			
 			$result = $db->select($sql);
 			if($result["exist"]){
-				echo "Używtkownik jest już zarejestrowany!<br />";
-				return;
+				throw new ErrorException('Użytkownik już istnieje');
 			}
 			
 			$data = $this->toArray();

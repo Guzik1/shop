@@ -54,7 +54,7 @@
 			if ($errors === "") {
 				$this->user = new User($data['userName'], $data['email'],$data['password']);
 			} else {
-				echo "Błędne dane: $errors";
+                throw new ErrorException('Hasło nie spełnia wymagań bezpieczeństwa');
 				$this->user = NULL;
 			}
 			
